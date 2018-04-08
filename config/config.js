@@ -4,5 +4,5 @@ require('dotenv').config();
 CONFIG = {};
 
 CONFIG.app = process.env.APP;
-CONFIG.port = process.env.port;
+CONFIG.port = process.env.PORT;
 CONFIG.dbUri = process.env.DB_URI;
