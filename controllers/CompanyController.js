@@ -2,21 +2,27 @@ const { Company } = require('../models');
 
 const create = async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
-  let err;
-  let company;
+
   const body = req.body;
+
+  // da formato a la url_key
   const url_key = body.nombre_fantasia
     .split(' ')
     .join('')
     .trim()
     .toLowerCase();
 
+  let err;
+  let company;
+  //la crea y la aguarda, espera y asigna a err si hay error o a company el resultado de la promesa
   [err, company] = await to(Company.create({ ...body, url_key }));
 
+  //Si hay error envia el error
   if (err) {
     return ReE(res, err, 400);
   }
 
+  //Si todo salio bien envia la compania creada al cliente
   return ReS(res, company, 200);
 };
 
@@ -43,10 +49,8 @@ const get = async (req, res) => {
   let err;
   let company;
 
-  [err, company] = await to(Company.findOne({ url_key }));
-  company.find({}).then(res => {
-    console.log(res);
-  });
+  [err, company] = await to(Company.findOne({ url_key }).populate('productos'));
+
   if (err) {
     return ReE(res, err, 400);
   }
@@ -82,6 +86,7 @@ const update = async (req, res) => {
 
 module.exports.update = update;
 
+//TODO: Cuando se elimina una compania se debe pullear de cada array de companias de los productos
 const remove = async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   const url_key = req.params.url_key;

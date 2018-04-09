@@ -60,7 +60,8 @@ var schema = new Schema({
     lowercase: true,
     index: true,
     unique: true
-  }
+  },
+  productos: [{ type: Schema.Types.ObjectId, ref: 'products' }]
 });
 
-module.exports = mongoose.model('Company', schema);
+module.exports = mongoose.model('companies', schema);

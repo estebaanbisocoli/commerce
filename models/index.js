@@ -19,7 +19,7 @@ let db = mongoose.connection;
 module.exports = db;
 
 db.once('open', () => {
-  console.log('conectado a mongo en el puerto', CONFIG.port);
+  console.log('conectado a mongo');
 });
 
 db.on('error', error => {
