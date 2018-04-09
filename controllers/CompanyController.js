@@ -6,15 +6,11 @@ const create = async (req, res) => {
   const body = req.body;
 
   // da formato a la url_key
-  const url_key = body.nombre_fantasia
-    .split(' ')
-    .join('')
-    .trim()
-    .toLowerCase();
+  const url_key = NSTR(body.nombre_fantasia);
 
   let err;
   let company;
-  //la crea y la aguarda, espera y asigna a err si hay error o a company el resultado de la promesa
+  //crea la compania y la guarda, espera y asigna a err si hay error o a company el resultado de la promesa
   [err, company] = await to(Company.create({ ...body, url_key }));
 
   //Si hay error envia el error
