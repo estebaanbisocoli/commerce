@@ -6,13 +6,15 @@ console.log('enviroment', CONFIG.app);
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const favicon = require('serve-favicon');
+const path = require('path');
 
 const v1 = require('./routes/v1');
 
 const app = express();
 
 //express middleware
-
+app.use(favicon(path.join(__dirname, 'assets', 'favicon.png')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 
