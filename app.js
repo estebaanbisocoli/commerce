@@ -19,20 +19,19 @@ app.use(bodyParser.json());
 //DATABASE
 const models = require('./models');
 
+//Las rutas del API
 app.use('/v1', v1);
 
+//ROOT
 app.get('/', (req, res) => {
   ReS(res, { path: '/', message: 'root' }, 200);
 });
 
 // Todas las urls que no matchean lo anterior pasan por este middleware
-app.use((req, res, next) => {
+app.use((req, res) => {
   let err = new Error('Not Found');
   err.status = 404;
-  next(err);
-});
-
-app.use((err, req, res, next) => {
   ReE(res, err, err.status);
 });
+
 module.exports = app;

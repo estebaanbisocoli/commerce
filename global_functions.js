@@ -32,20 +32,22 @@ ReE = (res, err, code) => {
 
 //Response success
 ReS = (res, data, code) => {
-  let send_data = { success: true };
-
-  if (typeof data == 'object') {
-    send_data = Object.assign(data, send_data);
-  }
+  let body = { success: true, data };
 
   //si existe un codigo
   if (typeof code !== 'undefined') {
     res.statusCode = code;
   }
-  return res.json(send_data);
+  return res.json(body);
 };
 
 // handle todas la promesas que no fueron catcheadas
+
+NSTR = str =>
+  str
+    .split(' ')
+    .join('')
+    .toLowerCase();
 
 process.on('unhandledRejection', err => {
   console.error('Uncaught Error', pe(err));

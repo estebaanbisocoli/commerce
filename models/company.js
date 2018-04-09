@@ -36,7 +36,7 @@ var catalogo_ImagenesSchema = new Schema({
 // Creacion campos asociados a la Empresa
 
 var schema = new Schema({
-  nombre_fantasia: { type: String, required: true },
+  nombre_fantasia: { type: String, required: true, unique: true },
   quienes_somos: { type: String, required: true },
   que_hacemos: { type: String, required: true },
   direccion: { type: String, required: true },
@@ -53,7 +53,14 @@ var schema = new Schema({
   descripcion_producto_servicio: [producto_ServicioSchema],
   catalogo_imagenes: [catalogo_ImagenesSchema],
   productos: [{ type: ObjectID, ref: 'companies' }],
-  active: { type: Boolean, default: true }
+  active: { type: Boolean, default: true },
+  url_key: {
+    type: String,
+    trim: true,
+    lowercase: true,
+    index: true,
+    unique: true
+  }
 });
 
 module.exports = mongoose.model('Company', schema);
