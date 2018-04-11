@@ -6,12 +6,11 @@ const create = async (req, res) => {
   const body = req.body;
 
   // da formato a la url_key
-  const url_key = NSTR(body.nombre_fantasia);
 
   let err;
   let company;
   //crea la compania y la guarda, espera y asigna a err si hay error o a company el resultado de la promesa
-  [err, company] = await to(Company.create({ ...body, url_key }));
+  [err, company] = await to(Company.create(body));
 
   //Si hay error envia el error
   if (err) {
@@ -50,6 +49,9 @@ const get = async (req, res) => {
   if (err) {
     return ReE(res, err, 400);
   }
+  if (!company) {
+    return ReE(res, 'No se encontro compania', 400);
+  }
   return ReS(res, company, 200);
 };
 
@@ -60,15 +62,11 @@ const update = async (req, res) => {
   //no hay data
   const url_key = req.params.url_key;
   const body = { ...req.body };
-  if (body.nombre_fantasia) {
-    body.url_key = NSTR(body.nombre_fantasia);
-  }
 
-  let err;
-  let company;
-  console.log(url_key);
-  [err, company] = await to(
-    Company.findOneAndUpdate({ url_key }, body, { new: true })
+  body.nombre_fantasia && (body.url_key = NSTR(body.nombre_fantasia));
+
+  let [err, company] = await to(
+    Company.findOneAndUpdate({ url_key }, { ...body }, { new: true })
   );
 
   if (err) {

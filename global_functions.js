@@ -48,7 +48,3 @@ NSTR = str =>
     .split(' ')
     .join('')
     .toLowerCase();
-
-process.on('unhandledRejection', err => {
-  console.error('Uncaught Error', pe(err));
-});

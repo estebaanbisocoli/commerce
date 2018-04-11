@@ -5,4 +5,11 @@ CONFIG = {};
 
 CONFIG.app = process.env.APP;
 CONFIG.port = process.env.PORT;
-CONFIG.dbUri = process.env.DB_URI;
+CONFIG.dbUri =
+  CONFIG.app == 'prod'
+    ? process.env.DB_URI
+    : 'mongodb://admin:admin@ds139929.mlab.com:39929/commerce-dev';
+
+CONFIG.rootUrl = 'http://localhost';
+
+module.exports = CONFIG;

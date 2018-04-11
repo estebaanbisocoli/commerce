@@ -36,5 +36,4 @@ app.use((req, res) => {
   ReE(res, err, err.status);
 });
 
-console.log(process.env.IP);
 module.exports = app;

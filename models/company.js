@@ -63,5 +63,12 @@ var schema = new Schema({
   },
   productos: [{ type: Schema.Types.ObjectId, ref: 'products' }]
 });
-
+schema.pre('save', function(next) {
+  if (this.isModified('nombre_fantasia') || this.isNew) {
+    this.url_key = NSTR(this.nombre_fantasia);
+    next();
+  } else {
+    next();
+  }
+});
 module.exports = mongoose.model('companies', schema);
