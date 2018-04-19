@@ -1,6 +1,7 @@
 'use strict';
 const { Product, Company } = require('../models');
 
+// Esto lo tengo que refactorizar.
 const create = async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
 
@@ -87,10 +88,7 @@ const get = async (req, res) => {
 
   const product_id = req.params.product_id;
 
-  let err;
-  let product;
-
-  [err, product] = await to(Product.findById(product_id));
+  let [err, product] = await to(Product.findById(product_id));
 
   if (err) {
     return ReE(res, err, 400);
@@ -111,10 +109,7 @@ const update = async (req, res) => {
   let body = {};
   body = { ...req.body };
 
-  let err;
-  let product;
-
-  [err, product] = await to(
+  let [err, product] = await to(
     Product.findByIdAndUpdate(product_id, body, { new: true })
   );
 
@@ -134,9 +129,7 @@ const remove = async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   const product_id = req.params.product_id;
 
-  let err;
-  let product;
-  [err, product] = await to(Product.findByIdAndRemove(product_id));
+  let [err, product] = await to(Product.findByIdAndRemove(product_id));
 
   if (err) {
     return ReE(res, err, 400);
@@ -144,10 +137,7 @@ const remove = async (req, res) => {
 
   if (product) {
     product.companias.forEach(async company_id => {
-      let err;
-      let company;
-
-      [err, company] = await to(
+      let [err, company] = await to(
         Company.findByIdAndUpdate(
           company_id,
           { $pull: { productos: product_id } },

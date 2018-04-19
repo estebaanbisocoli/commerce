@@ -1,19 +1,24 @@
 require('./config/config');
 require('./global_functions');
 
-console.log('enviroment', CONFIG.app);
-
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
 const path = require('path');
+const cors = require('cors');
 
 const v1 = require('./routes/v1');
 
 const app = express();
 
 //express middleware
+app.use(express.static(path.join(__dirname, 'client', 'build')));
+
+if (process.env.NODE_ENV === 'dev') {
+  app.use(cors());
+}
+
 app.use(favicon(path.join(__dirname, 'assets', 'favicon.png')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -26,7 +31,7 @@ app.use('/v1', v1);
 
 //ROOT
 app.get('/', (req, res) => {
-  ReS(res, { path: '/', message: 'root' }, 200);
+  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 });
 
 // Todas las urls que no matchean lo anterior pasan por este middleware

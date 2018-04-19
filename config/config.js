@@ -5,6 +5,8 @@ CONFIG = {};
 
 CONFIG.app = process.env.APP;
 CONFIG.port = process.env.PORT;
+
+//arreglar esto
 CONFIG.dbUri =
   CONFIG.app == 'prod'
     ? process.env.DB_URI
