@@ -1,6 +1,6 @@
 require('./config/config');
 require('./global_functions');
-
+console.log(process.env.NODE_ENV);
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
@@ -15,9 +15,7 @@ const app = express();
 //express middleware
 app.use(express.static(path.join(__dirname, 'client', 'build')));
 
-if (process.env.NODE_ENV === 'dev') {
-  app.use(cors());
-}
+app.use(cors());
 
 app.use(favicon(path.join(__dirname, 'assets', 'favicon.png')));
 app.use(logger('dev'));

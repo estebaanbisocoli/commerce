@@ -1,7 +1,6 @@
 const { Company } = require('../models');
 
 const create = async (req, res) => {
-  console.log(req.body);
   res.setHeader('Content-Type', 'application/json');
 
   const body = req.body;
