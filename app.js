@@ -27,7 +27,7 @@ const models = require('./models');
 //Las rutas del API
 app.use('/v1', v1);
 
-//ROOT
+// ROOT;
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 });

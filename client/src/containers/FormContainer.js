@@ -58,13 +58,15 @@ class FormContainer extends Component {
             });
           }
         })
+
         .catch(error => {
+          const errorMessage = error.response.data.error;
           notification.open({
             duration: 0,
             message: 'Registro Fallido',
-            description: JSON.stringify(error, undefined, 2)
+            description: JSON.stringify(errorMessage, undefined, 2)
           });
-          dispatch({ type: actions.ERROR_REGISTER, error });
+          dispatch({ type: actions.ERROR_REGISTER, error: errorMessage });
         });
     }
   }

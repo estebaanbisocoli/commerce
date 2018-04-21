@@ -1,7 +1,7 @@
 import axios from 'axios';
-
+import CONFIG from '../config';
 const axiosInstance = axios.create({
-  baseURL: process.env.API_URL || 'http://127.0.0.1:3001/v1/'
+  baseURL: CONFIG.API_LOCAL_V1
 });
 
 const sendData = data => {

@@ -39,6 +39,7 @@ var schema = new Schema({
   nombre_fantasia: { type: String, required: true, unique: true },
   quienes_somos: { type: String, required: true },
   que_hacemos: { type: String, required: true },
+  //TODO: agregar schema de direccion
   direccion: { type: String, required: true },
   email: {
     type: String,

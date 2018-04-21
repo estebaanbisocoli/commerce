@@ -14,7 +14,6 @@ class WizardForm extends Component {
   }
 
   nextPage() {
-    console.log(this.state);
     this.setState({ page: this.state.page + 1 });
   }
 

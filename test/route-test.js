@@ -108,7 +108,7 @@ describe('Company Routes', () => {
       client.post('/v1/companies', mockCompany(1), async (err, res, body) => {
         if (err) throw err;
         expect(err).to.equal(null);
-        expect(res.statusCode).to.equal(202);
+        expect(res.statusCode).to.equal(400);
         let [, companies] = await to(Company.find({}));
         expect(companies.length).to.equal(1);
         expect(companies[0]._id).to.eql(company._id);

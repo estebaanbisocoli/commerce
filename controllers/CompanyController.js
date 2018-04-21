@@ -1,5 +1,6 @@
 const { Company } = require('../models');
 
+//TODO: arreglar todos los codigos de error
 const create = async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
 
@@ -8,7 +9,7 @@ const create = async (req, res) => {
     let company = await Company.create(body);
     return ReS(res, company, 200);
   } catch (error) {
-    return ReE(res, error, 202);
+    return ReE(res, error, 400);
   }
 };
 

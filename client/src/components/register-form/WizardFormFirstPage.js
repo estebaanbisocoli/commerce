@@ -6,10 +6,10 @@ import validate from './validate';
 import { Field, reduxForm, submit } from 'redux-form';
 import styled from 'styled-components';
 
-const WizardFormFirstPage = ({ dispatch, loading, handleSubmit, onSubmit }) => {
+const WizardFormFirstPage = ({ dispatch, loading, handleSubmit }) => {
   return (
     <div>
-      <Row gutter={20}>
+      {/* <Row gutter={20}>
         <Col sm={{ span: 24 }} lg={{ span: 6, offset: 6 }}>
           <Alert message="¡Bienvenido a la pagina donde vas a registrar tu empresa!" />
         </Col>
@@ -17,7 +17,7 @@ const WizardFormFirstPage = ({ dispatch, loading, handleSubmit, onSubmit }) => {
           <Alert message="¡Bienvenido a la pagina donde vas a registrar tu empresa!" />
         </Col>
       </Row>
-      <Divider />
+      <Divider /> */}
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col xs={{ span: 24 }} md={{ span: 20, offset: 4 }}>
