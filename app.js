@@ -13,7 +13,7 @@ const v1 = require('./routes/v1');
 const app = express();
 
 //express middleware
-app.use(express.static(path.join(__dirname, 'client', 'build')));
+// app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 app.use(cors());
 
@@ -28,9 +28,9 @@ const models = require('./models');
 app.use('/v1', v1);
 
 // ROOT;
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-});
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+// });
 
 // Todas las urls que no matchean lo anterior pasan por este middleware
 app.use((req, res) => {
