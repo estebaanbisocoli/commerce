@@ -1,4 +1,5 @@
-const { Company } = require('../models');
+const { Company, Product } = require('../models');
+const { ObjectId } = require('mongoose').Types;
 
 //TODO: arreglar todos los codigos de error
 const create = async (req, res) => {
@@ -33,9 +34,13 @@ const get = async (req, res) => {
   const url_key = req.params.url_key;
   try {
     let company = await Company.findOne({ url_key }).populate('productos');
+
+    //TODO: Esto solo es en desarollo encontrar otra solucion.
     if (!company) {
       return ReE(res, 'No se encontro compania', 400);
     }
+    //Populate manual para poder agregar paginacion
+
     return ReS(res, company, 200);
   } catch (error) {
     return ReE(res, error, 400);
@@ -87,3 +92,37 @@ const remove = async (req, res) => {
 };
 
 module.exports.remove = remove;
+
+const postImage = async (req, res) => {
+  console.log(req.error);
+  if (req.file && req.file.cloudStoragePublicUrl) {
+    req.body.imageUrl = req.file.cloudStoragePublicUrl;
+  }
+  res.send(req.body);
+};
+module.exports.postImage = postImage;
+
+const getCompanyProductsByPage = async (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+
+  const url_key = req.params.url_key;
+  const perPage = 12;
+  var page = req.params.page || 1;
+  try {
+    let company = await Company.findOne({ url_key });
+    if (!company) {
+      ReS(res, 'La Empresa no existe', 200);
+    }
+    Product.find({
+      _id: { $in: company.productos.map(id => ObjectId(id)) }
+    })
+      .skip(perPage * page - perPage)
+      .limit(perPage)
+      .exec((err, productos) => {
+        ReS(res, { page, productos }, 200);
+      });
+  } catch (error) {
+    return ReE(res, error, 400);
+  }
+};
+module.exports.getCompanyProductsByPage = getCompanyProductsByPage;

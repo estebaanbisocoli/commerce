@@ -9,22 +9,23 @@ var indicadorSchema = new Schema({ porc_rent: String });
 // Creacion campos asociados al Producto
 
 var schema = new Schema({
-  codigo: { type: String, required: true },
-  nombre: { type: String, required: true },
-  descripcion: { type: String, required: true },
-  rutaImagen: { type: String, required: true },
-  categoria: { type: String, required: true },
-  estado: { type: String, required: true },
+  codigo: { type: String },
+  nombre: { type: String },
+  descripcion: { type: String },
+  rutaImagenes: { type: Array 
+  },
+  categoria: { type: String },
+  estado: { type: String },
   proveedores: [proveedorSchema],
-  stock: { type: Number, required: true },
-  valorCompra: { type: Number, required: true },
-  ivaCompra: { type: Number, required: true },
-  totalCompra: { type: Number, required: true },
-  valorVenta: { type: Number, required: true },
-  ivaVenta: { type: Number, required: true },
-  totalVenta: { type: Number, required: true },
+  stock: { type: Number },
+  valorCompra: { type: Number },
+  ivaCompra: { type: Number },
+  totalCompra: { type: Number },
+  valorVenta: { type: Number },
+  ivaVenta: { type: Number },
+  totalVenta: { type: Number },
   rentabilidad: [indicadorSchema],
-  observaciones: { type: String, required: true },
+  observaciones: { type: String },
   companias: [{ type: Schema.Types.ObjectId, ref: 'companies' }]
 });
 

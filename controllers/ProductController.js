@@ -47,8 +47,8 @@ const create = async (req, res) => {
       [err, company] = await to(
         Company.findByIdAndUpdate(
           company_id,
-          { productos: [product._id] },
-          { new: true }
+          { $push: { productos: product } },
+          { new: true, upsert: true }
         )
       );
 

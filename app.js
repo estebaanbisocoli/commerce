@@ -31,6 +31,9 @@ app.use('/v1', v1);
 // app.get('/', (req, res) => {
 //   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 // });
+app.get('/', (req, res) => {
+  res.sendFile(path.join(`${__dirname}/index.html`));
+});
 
 // Todas las urls que no matchean lo anterior pasan por este middleware
 app.use((req, res) => {

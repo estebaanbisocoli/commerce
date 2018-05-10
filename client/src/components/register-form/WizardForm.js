@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { WizardFormFirstPage, FormContainer } from './';
 
-import { message } from 'antd';
+import message from 'antd/lib/message';
 class WizardForm extends Component {
   constructor(props) {
     super(props);
